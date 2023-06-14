@@ -1,0 +1,6 @@
+{
+  "username": "#username",
+  "password": "#password",
+  "signinBtn":"#signInBtn",
+  "errorBanner": "[style*=block]"
+}
