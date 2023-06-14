@@ -1,4 +1,8 @@
 import { defineConfig } from "@playwright/test";
+import { getConfig } from "./tests/configuration/configs/get-config";
+const config = getConfig({ ENV: process.env.ENV ?? "local" });
+
+// const ENV = process.env.ENV;
 
 /**
  * Read environment variables from file.
@@ -11,7 +15,7 @@ import { defineConfig } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
-  testMatch: "tests/explore-locators.ts",
+  testMatch: "tests/login.ts",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -24,6 +28,9 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // baseURL: "https://rahulshettyacademy.com",
+    baseURL: config.url,
+
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
@@ -41,6 +48,7 @@ export default defineConfig({
         launchOptions: { args: ["--start-maximized"] },
         trace: "on",
         headless: false,
+        // baseURL: testConfig[process.env.ENV],
       },
     },
 
